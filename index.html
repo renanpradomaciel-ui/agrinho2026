@@ -1,1 +1,93 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ciclo Vivo | Agro Forte & Sustentável</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <div id="impact-bar">
+        <div class="container">
+            <span>🌍 Impacto Global (Estimado): </span>
+            <strong><span id="water-saved">0</span>L de água poupados</strong> | 
+            <strong><span id="co2-saved">0</span>kg de CO2 sequestrados</strong>
+        </div>
+    </div>
+
+    <nav>
+        <div class="container nav-content">
+            <div class="logo">Ciclo<span>Vivo</span></div>
+            <ul class="nav-menu">
+                <li><a href="#" onclick="showPage('home')">Simulador</a></li>
+                <li><a href="#" onclick="showPage('sobre-mim')">Sobre Mim</a></li>
+                <li><a href="#" onclick="showPage('agrinho')">O Agrinho</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <section id="home" class="page active">
+        <header class="hero">
+            <h1>Cultivando hoje o mundo que queremos colher amanhã.</h1>
+            <p>A agricultura sustentável não é voltar ao passado, é dominar o futuro.</p>
+        </header>
+
+        <div class="container">
+            <div class="game-card">
+                <h2>🎮 Game da Sustentabilidade</h2>
+                <p>Sua fazenda está sob ataque de pragas! Qual tecnologia você utiliza?</p>
+                
+                <div class="game-choices">
+                    <button class="btn-terra" onclick="playGame('quimico')">Defensivo Químico Comum</button>
+                    <button class="btn-tech" onclick="playGame('bio')">Controle Biológico + Drone</button>
+                </div>
+
+                <div id="game-result" class="hidden">
+                    <div class="stats-grid">
+                        <div class="stat">Saúde do Solo: <span id="stat-soil">--</span></div>
+                        <div class="stat">Lucro Final: <span id="stat-profit">--</span></div>
+                        <div class="stat">Biodiversidade: <span id="stat-bio">--</span></div>
+                    </div>
+                    <p id="game-feedback"></p>
+                </div>
+            </div>
+
+            <div class="info-grid">
+                <div class="info-item">
+                    <h3>🛰️ Mapa do Tesouro</h3>
+                    <p>Sensores detectam onde a planta tem sede. Economia real de insumos.</p>
+                </div>
+                <div class="info-item">
+                    <h3>🌱 Diário da Terra</h3>
+                    <p>O solo coberto funciona como um pulmão, guardando carbono e água.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="sobre-mim" class="page">
+        <div class="container content-text">
+            <h2>👨‍💻 O Autor</h2>
+            <p>Olá! Sou aluno do 1º ano do Ensino Médio e entusiasta da tecnologia aplicada ao campo.</p>
+            <p>O <strong>Ciclo Vivo</strong> nasceu da vontade de mostrar que o jovem do campo é um cientista de dados, um piloto de drone e, acima de tudo, o guardião da nossa terra.</p>
+            <div class="tech-tags">
+                <span>Inovação</span> <span>Educação</span> <span>Consciência</span>
+            </div>
+        </div>
+    </section>
+
+    <section id="agrinho" class="page">
+        <div class="container content-text">
+            <h2>🌾 Concurso Agrinho 2026</h2>
+            <p>O maior programa de responsabilidade social do sistema FAEP/SENAR-PR.</p>
+            <p>O tema <strong>Agro Forte, Futuro Sustentável</strong> nos desafia a equilibrar a balança: produzir alimento para o mundo enquanto regeneramos nossos biomas.</p>
+            <blockquote>"O equilíbrio entre produção e meio ambiente é a única colheita possível para o futuro."</blockquote>
+        </div>
+    </section>
+
+    <script src="script.js"></script>
+</body>
+</html>
 
