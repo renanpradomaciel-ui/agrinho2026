@@ -21,7 +21,7 @@
         <div class="container nav-content">
             <div class="logo">Ciclo<span>Vivo</span></div>
             <ul class="nav-menu">
-                <li><a href="#" onclick="showPage('home')">Simulador</a></li>
+                <li><a href="#" onclick="showPage('home')">Simulador & Mapa</a></li>
                 <li><a href="#" onclick="showPage('sobre-mim')">Sobre Mim</a></li>
                 <li><a href="#" onclick="showPage('agrinho')">O Agrinho</a></li>
             </ul>
@@ -35,14 +35,30 @@
         </header>
 
         <div class="container">
-            <div class="game-card">
-                <h2>🎮 Game da Sustentabilidade</h2>
-                <p>Sua fazenda está sob ataque de pragas! Qual tecnologia você utiliza?</p>
+            
+            <div class="map-section">
+                <h2>🛰️ Painel de Controle: Mapa Interativo</h2>
+                <p>Clique em uma das áreas (talhões) da fazenda digital para analisar e tomar decisões de manejo:</p>
                 
-                <div class="game-choices">
-                    <button class="btn-terra" onclick="playGame('quimico')">Defensivo Químico Comum</button>
-                    <button class="btn-tech" onclick="playGame('bio')">Controle Biológico + Drone</button>
+                <div class="farm-map">
+                    <div class="map-zone zone-lavoura" onclick="startMission(1)">
+                        <span>Talhão 01<br><b>Lavoura</b></span>
+                    </div>
+                    <div class="map-zone zone-solo" onclick="startMission(2)">
+                        <span>Talhão 02<br><b>Solo/Preparo</b></span>
+                    </div>
+                    <div class="map-zone zone-nascente" onclick="startMission(3)">
+                        <span>APP<br><b>Nascente</b></span>
+                    </div>
                 </div>
+            </div>
+
+            <div id="game-container" class="game-card hidden">
+                <h2 id="game-title">🎮 Missão de Campo</h2>
+                <p id="game-question">Selecione uma área no mapa acima para começar.</p>
+                
+                <div class="game-choices" id="game-choices">
+                    </div>
 
                 <div id="game-result" class="hidden">
                     <div class="stats-grid">
@@ -56,12 +72,12 @@
 
             <div class="info-grid">
                 <div class="info-item">
-                    <h3>🛰️ Mapa do Tesouro</h3>
-                    <p>Sensores detectam onde a planta tem sede. Economia real de insumos.</p>
+                    <h3>🛰️ Agricultura de Precisão</h3>
+                    <p>Sensores conectados via internet das coisas (IoT) detectam a real necessidade de cada planta, gota a gota.</p>
                 </div>
                 <div class="info-item">
-                    <h3>🌱 Diário da Terra</h3>
-                    <p>O solo coberto funciona como um pulmão, guardando carbono e água.</p>
+                    <h3>🌱 O Segredo do Solo</h3>
+                    <p>A rotação de culturas quebra o ciclo de pragas e cria uma armadura natural contra a erosão.</p>
                 </div>
             </div>
         </div>
@@ -90,4 +106,3 @@
     <script src="script.js"></script>
 </body>
 </html>
-
