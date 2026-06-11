@@ -23,19 +23,18 @@ function navigateTo(pageId) {
     window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
-// BANCO DE DADOS: Perguntas e Imagens específicas por Talhão
+// BANCO DE DADOS: Cada ID corresponde a uma página/pergunta diferente
 const bancoQuestoes = {
     1: {
         titulo: "🛰️ Página do Talhão 01: Monitoramento de Pragas",
-        imagem: "https://images.unsplash.com/photo-1563514227147-6d2ff66526a0?auto=format&fit=crop&w=800&q=80", // Foto de drone analisando plantação
         descricao: "Nossos sensores térmicos captaram focos iniciais de Lagarta-do-Cartucho no meio da lavoura de milho. Qual comando você envia?",
         alternativas: [
             { texto: "Aplicar pulverização com inseticida químico de largo espectro em toda a área.", tipo: "errado" },
             { texto: "Acionar drones de precisão para liberar biológicos (Trichogramma) apenas nos focos mapeados.", tipo: "certo" }
         ],
         relatorio: {
-            solo: "📉 Desgastado", lucro: "⚠️ Reduzido (Custo químico elevado)", bio: "🚫 Crítica (Abelhas afetadas)", cor: "#d62828",
-            texto: "O produto resolveu a praga de imediato, mas destruiu polinizadores essenciais e deixou resíduos químicos na terra, reduzindo a força natural do ecossistema."
+            solo: "📉 Desgastado", lucro: "⚠️ Alto (Custo químico elevado)", bio: "🚫 Crítica (Abelhas afetadas)", cor: "#d62828",
+            texto: "O produto resolveu a praga de imediato, mas destruiu polinizadores essenciais e deixou resíduos químicos na terra, reduzindo a resiliência do ecossistema local."
         },
         relatorioSucesso: {
             solo: "📈 Preservado", lucro: "💎 Alto e Estável", bio: "🐝 Protegida", cor: "#2b9348",
@@ -44,7 +43,6 @@ const bancoQuestoes = {
     },
     2: {
         titulo: "🌱 Página do Talhão 02: Gestão Orgânica do Solo",
-        imagem: "https://images.unsplash.com/photo-1622383563227-04401ab4e5ea?auto=format&fit=crop&w=800&q=80", // Solo agrícola bem manejado
         descricao: "O mapeamento de umidade acusa que a terra está secando muito rápido no intervalo de safras. Qual manejo será adotado nesta página?",
         alternativas: [
             { texto: "Passar o arado mecânico pesado para revirar a terra e expor nutrientes profundos.", tipo: "errado" },
@@ -61,7 +59,6 @@ const bancoQuestoes = {
     },
     3: {
         titulo: "💧 Página da APP: Preservação de Recursos Hídricos",
-        imagem: "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=800&q=80", // Nascente/Floresta preservada
         descricao: "A telemetria fluvial indica um leve assoreamento no córrego que abastece a propriedade. Qual ação corretiva aplicar imediatamente?",
         alternativas: [
             { texto: "Cercar a Área de Preservação Permanente (APP) e fazer o plantio adensado de matas ciliares nativas.", tipo: "certo" },
@@ -80,14 +77,18 @@ const bancoQuestoes = {
 
 let questaoAtiva = null;
 
+// Aciona a mudança de tela para carregar a pergunta selecionada no mapa
 function goToQuestion(id) {
     questaoAtiva = bancoQuestoes[id];
     
-    document.getElementById('q-image').src = questaoAtiva.imagem;
+    // Altera os elementos visuais da tela de perguntas
     document.getElementById('q-title').innerText = questaoAtiva.titulo;
     document.getElementById('q-desc').innerText = questaoAtiva.descricao;
+    
+    // Oculta relatórios anteriores
     document.getElementById('q-result').classList.add('hidden');
     
+    // Limpa e reconstrói as alternativas em formato de lista estruturada
     const containerAlternativas = document.getElementById('q-choices');
     containerAlternativas.innerHTML = "";
     
@@ -98,9 +99,11 @@ function goToQuestion(id) {
         containerAlternativas.appendChild(btn);
     });
     
+    // Navega para a página de perguntas dedicada
     navigateTo('question-page');
 }
 
+// Processa a alternativa escolhida e exibe o relatório na tela
 function calculaResultadoQuestao(tipoResposta) {
     const boxResultado = document.getElementById('q-result');
     boxResultado.classList.remove('hidden');
@@ -120,46 +123,7 @@ function calculaResultadoQuestao(tipoResposta) {
     sBio.style.color = dadosRelatorio.cor;
     
     document.getElementById('q-feedback').innerHTML = `<strong>Análise do Satélite:</strong> ${dadosRelatorio.texto}`;
+    
+    // Auto-scroll suave para o relatório gerado
     boxResultado.scrollIntoView({ behavior: 'smooth' });
 }
-
-// LÓGICA DO CHATBOT (SISTEMA DE INTELIGÊNCIA ARTIFICIAL SIMULADA)
-const respostasIA = {
-    "o que é agricultura de precisão?": "A Agricultura de Precisão usa tecnologia de ponta (como GPS, drones e sensores) para analisar o campo detalhadamente. Em vez de tratar a fazenda inteira igual, o produtor aplica água ou insumos apenas no metro quadrado exato que a planta necessita. Isso gera uma economia brutal de recursos!",
-    "como o plantio direto ajuda o planeta?": "O Plantio Direto não revolve a terra com arado. A semente é plantada direto sob os restos orgânicos da colheita anterior. Essa camada de palha evita que a água evapore, bloqueia a erosão e o mais espetacular: mantém o Carbono estocado no solo, impedindo que vire gás poluente na atmosfera!",
-    "qual o tema do agrinho 2026?": "O tema oficial de 2026 é 'Agro Forte, Futuro Sustentável: Equilíbrio entre produção e meio ambiente'. O objetivo é desafiar estudantes a criarem soluções que provem que a tecnologia e a preservação andam de mãos dadas para alimentar o mundo.",
-    "padrão": "Excelente pergunta! O uso de inteligência analítica e biotecnologia nos permite produzir mais alimentos por hectare sem a necessidade de expandir áreas verdes. Esse é o coração do projeto Ciclo Vivo!"
-};
-
-function askIA(perguntaTexto) {
-    const chatBox = document.getElementById('chat-box');
-    
-    // 1. Mensagem do Usuário
-    const userDiv = document.createElement('div');
-    userDiv.className = "message user-message";
-    userDiv.innerText = perguntaTexto;
-    chatBox.appendChild(userDiv);
-    
-    // 2. Processamento da Resposta da IA
-    const perguntaLimpa = perguntaTexto.toLowerCase().trim();
-    let respostaTexto = respostasIA[perguntaLimpa] || respostasIA["padrão"];
-    
-    // Delay simulado para parecer processamento em tempo real
-    setTimeout(() => {
-        const iaDiv = document.createElement('div');
-        iaDiv.className = "message ia-message";
-        iaDiv.innerText = respostaTexto;
-        chatBox.appendChild(iaDiv);
-        chatBox.scrollTop = chatBox.scrollHeight;
-    }, 400);
-}
-
-function sendUserMessage() {
-    const inputEl = document.getElementById('user-input');
-    const texto = inputEl.value;
-    if(texto.trim() !== "") {
-        askIA(texto);
-        inputEl.value = "";
-    }
-}
-
