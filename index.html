@@ -22,8 +22,8 @@
             <div class="logo">Ciclo<span>Vivo</span></div>
             <ul class="nav-menu">
                 <li><a href="#" onclick="navigateTo('home')">Central do Mapa</a></li>
-                <li><a href="#" onclick="navigateTo('agro-ia')">Fale com a AgroIA</a></li>
-                <li><a href="#" onclick="navigateTo('sobre-mim')">Sobre Mim / Agrinho</a></li>
+                <li><a href="#" onclick="navigateTo('sobre-mim')">Sobre Mim</a></li>
+                <li><a href="#" onclick="navigateTo('agrinho')">O Agrinho</a></li>
             </ul>
         </div>
     </nav>
@@ -82,15 +82,11 @@
             
             <div class="game-card">
                 <div class="telemetry-bar">📡 Telemetria do Talhão Ativa</div>
-                
-                <div class="satellite-img-container">
-                    <img id="q-image" src="" alt="Visão do Satélite">
-                </div>
-
                 <h2 id="q-title">Carregando Missão...</h2>
                 <p id="q-desc" class="question-text"></p>
                 
-                <div class="game-choices" id="q-choices"></div>
+                <div class="game-choices" id="q-choices">
+                    </div>
 
                 <div id="q-result" class="result-box hidden">
                     <h3>📋 Relatório de Impacto Ambiental e Econômico</h3>
@@ -114,37 +110,19 @@
         </div>
     </section>
 
-    <section id="agro-ia" class="page">
-        <div class="container chat-container">
-            <div class="chat-header">
-                <h2>🤖 AgroIA: Assistente de Sustentabilidade</h2>
-                <p>Pergunte-me sobre Drones, Plantio Direto, Crédito de Carbono ou o Agrinho!</p>
-            </div>
-            <div class="chat-box" id="chat-box">
-                <div class="message ia-message">Olá! Sou a AgroIA. Digite sua dúvida ou selecione uma das perguntas frequentes abaixo!</div>
-            </div>
-            
-            <div class="chat-suggestions">
-                <button onclick="askIA('O que é Agricultura de Precisão?')">O que é Agricultura de Precisão?</button>
-                <button onclick="askIA('Como o Plantio Direto ajuda o planeta?')">Como o Plantio Direto ajuda o planeta?</button>
-                <button onclick="askIA('Qual o tema do Agrinho 2026?')">Qual o tema do Agrinho 2026?</button>
-            </div>
-
-            <div class="chat-input-area">
-                <input type="text" id="user-input" placeholder="Digite sua pergunta sobre o agro sustentável..." onkeypress="if(event.key === 'Enter') sendUserMessage()">
-                <button class="btn-tech" onclick="sendUserMessage()">Enviar</button>
-            </div>
-        </div>
-    </section>
-
     <section id="sobre-mim" class="page">
         <div class="container content-text">
             <h2>👨‍💻 O Autor</h2>
             <p>Olá! Sou aluno do 1º ano do Ensino Médio e entusiasta da tecnologia aplicada ao campo.</p>
             <p>O <strong>Ciclo Vivo</strong> nasceu da vontade de mostrar que o jovem do campo é um cientista de dados, um piloto de drone e, acima de tudo, o guardião da nossa terra.</p>
-            
-            <hr style="margin: 40px 0; border: 0; border-top: 1px solid #ccc;">
+            <div class="tech-tags">
+                <span>Inovação</span> <span>Educação</span> <span>Consciência</span>
+            </div>
+        </div>
+    </section>
 
+    <section id="agrinho" class="page">
+        <div class="container content-text">
             <h2>🌾 Concurso Agrinho 2026</h2>
             <p>O maior programa de responsabilidade social do sistema FAEP/SENAR-PR.</p>
             <p>O tema <strong>Agro Forte, Futuro Sustentável</strong> nos desafia a equilibrar a balança: produzir alimento para o mundo enquanto regeneramos nossos biomas.</p>
