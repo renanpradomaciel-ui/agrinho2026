@@ -5,14 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ciclo Vivo | Agro Forte & Sustentável</title>
     <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
 </head>
 <body>
 
     <div id="impact-bar">
         <div class="container">
-            <span>🌍 Impacto Global (Estimado): </span>
-            <strong><span id="water-saved">0</span>L de água poupados</strong> | 
+            <span>🌍 Monitoramento RT (1ha): </span>
+            <strong><span id="water-saved">0</span>L de água economizados</strong> | 
             <strong><span id="co2-saved">0</span>kg de CO2 sequestrados</strong>
         </div>
     </div>
@@ -21,9 +21,9 @@
         <div class="container nav-content">
             <div class="logo">Ciclo<span>Vivo</span></div>
             <ul class="nav-menu">
-                <li><a href="#" onclick="showPage('home')">Simulador & Mapa</a></li>
-                <li><a href="#" onclick="showPage('sobre-mim')">Sobre Mim</a></li>
-                <li><a href="#" onclick="showPage('agrinho')">O Agrinho</a></li>
+                <li><a href="#" onclick="navigateTo('home')">Central do Mapa</a></li>
+                <li><a href="#" onclick="navigateTo('sobre-mim')">Sobre Mim</a></li>
+                <li><a href="#" onclick="navigateTo('agrinho')">O Agrinho</a></li>
             </ul>
         </div>
     </nav>
@@ -31,53 +31,80 @@
     <section id="home" class="page active">
         <header class="hero">
             <h1>Cultivando hoje o mundo que queremos colher amanhã.</h1>
-            <p>A agricultura sustentável não é voltar ao passado, é dominar o futuro.</p>
+            <p>Conecte-se aos talhões da nossa fazenda tecnológica e gerencie em tempo real.</p>
         </header>
 
         <div class="container">
-            
             <div class="map-section">
-                <h2>🛰️ Painel de Controle: Mapa Interativo</h2>
-                <p>Clique em uma das áreas (talhões) da fazenda digital para analisar e tomar decisões de manejo:</p>
+                <div class="map-header">
+                    <h2>🛰️ Satélite RT-2026: Visão Geral da Propriedade</h2>
+                    <span class="pulse-badge">● TRANSMISSÃO AO VIVO</span>
+                </div>
                 
                 <div class="farm-map">
-                    <div class="map-zone zone-lavoura" onclick="startMission(1)">
-                        <span>Talhão 01<br><b>Lavoura</b></span>
+                    <div class="map-zone zone-lavoura" onclick="goToQuestion(1)">
+                        <div class="zone-overlay">
+                            <span>Talhão 01: Lavoura</span>
+                            <small>⚠️ Alerta de Insetos</small>
+                        </div>
                     </div>
-                    <div class="map-zone zone-solo" onclick="startMission(2)">
-                        <span>Talhão 02<br><b>Solo/Preparo</b></span>
+                    <div class="map-zone zone-solo" onclick="goToQuestion(2)">
+                        <div class="zone-overlay">
+                            <span>Talhão 02: Solo</span>
+                            <small>📊 Pronto para Plantio</small>
+                        </div>
                     </div>
-                    <div class="map-zone zone-nascente" onclick="startMission(3)">
-                        <span>APP<br><b>Nascente</b></span>
+                    <div class="map-zone zone-nascente" onclick="goToQuestion(3)">
+                        <div class="zone-overlay">
+                            <span>APP: Nascente</span>
+                            <small>💧 Monitorando Vazão</small>
+                        </div>
                     </div>
-                </div>
-            </div>
-
-            <div id="game-container" class="game-card hidden">
-                <h2 id="game-title">🎮 Missão de Campo</h2>
-                <p id="game-question">Selecione uma área no mapa acima para começar.</p>
-                
-                <div class="game-choices" id="game-choices">
-                    </div>
-
-                <div id="game-result" class="hidden">
-                    <div class="stats-grid">
-                        <div class="stat">Saúde do Solo: <span id="stat-soil">--</span></div>
-                        <div class="stat">Lucro Final: <span id="stat-profit">--</span></div>
-                        <div class="stat">Biodiversidade: <span id="stat-bio">--</span></div>
-                    </div>
-                    <p id="game-feedback"></p>
                 </div>
             </div>
 
             <div class="info-grid">
                 <div class="info-item">
                     <h3>🛰️ Agricultura de Precisão</h3>
-                    <p>Sensores conectados via internet das coisas (IoT) detectam a real necessidade de cada planta, gota a gota.</p>
+                    <p>Sensores IoT mapeiam o campo centímetro por centímetro, aplicando recursos apenas onde é necessário.</p>
                 </div>
                 <div class="info-item">
-                    <h3>🌱 O Segredo do Solo</h3>
-                    <p>A rotação de culturas quebra o ciclo de pragas e cria uma armadura natural contra a erosão.</p>
+                    <h3>🌱 Herança Viva</h3>
+                    <p>O equilíbrio perfeito usa a automação digital para proteger a microbiota da terra e as águas.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="question-page" class="page">
+        <div class="container">
+            <button class="btn-back" onclick="navigateTo('home')">← Voltar ao Mapa Geral</button>
+            
+            <div class="game-card">
+                <div class="telemetry-bar">📡 Telemetria do Talhão Ativa</div>
+                <h2 id="q-title">Carregando Missão...</h2>
+                <p id="q-desc" class="question-text"></p>
+                
+                <div class="game-choices" id="q-choices">
+                    </div>
+
+                <div id="q-result" class="result-box hidden">
+                    <h3>📋 Relatório de Impacto Ambiental e Econômico</h3>
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <span class="stat-title">Solo</span>
+                            <span id="stat-soil" class="stat-value">--</span>
+                        </div>
+                        <div class="stat-card">
+                            <span class="stat-title">Lucratividade</span>
+                            <span id="stat-profit" class="stat-value">--</span>
+                        </div>
+                        <div class="stat-card">
+                            <span class="stat-title">Biodiversidade</span>
+                            <span id="stat-bio" class="stat-value">--</span>
+                        </div>
+                    </div>
+                    <p id="q-feedback" class="feedback-text"></p>
                 </div>
             </div>
         </div>
