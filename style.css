@@ -1,10 +1,11 @@
 :root {
-    --bg: #050a05;
-    --card: #0d140d;
-    --verde: #2ecc71;
-    --azul: #3498db;
-    --terra: #e67e22;
-    --text: #e0e0e0;
+    --bg: #030704;
+    --card: #09110c;
+    --verde: #00ff66;
+    --azul: #00d9ff;
+    --terra: #ff9f43;
+    --text: #f0f0f0;
+    --border: #14291b;
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -17,124 +18,110 @@ body {
     display: flex;
 }
 
-/* Header de Telemetria */
+/* Telemetria de Satélite */
 #telemetry-header {
     position: fixed;
-    top: 0; left: 70px; right: 0;
-    height: 40px;
-    background: rgba(0,0,0,0.8);
-    border-bottom: 1px solid var(--verde);
-    display: flex;
-    align-items: center;
-    padding: 0 20px;
-    font-family: 'Orbitron', sans-serif;
-    font-size: 0.7rem;
-    z-index: 100;
+    top: 0; left: 70px; right: 0; height: 40px;
+    background: rgba(0,0,0,0.9); border-bottom: 1px solid var(--border);
+    display: flex; align-items: center; padding: 0 20px;
+    font-family: 'Orbitron', sans-serif; font-size: 0.75rem; z-index: 100;
 }
-.live-indicator { color: #ff4757; margin-right: 20px; animation: pulse 1.5s infinite; }
-.stat { margin-right: 20px; color: #aaa; }
-.stat strong { color: var(--verde); }
+.live-indicator { color: #ff4d4d; margin-right: 20px; animation: blink 2s infinite; }
+.stat { margin-right: 25px; }
+.stat strong { color: var(--azul); }
 
-/* Navegação Lateral */
+/* Menu Lateral Estilo Cyberpunk Agro */
 .side-nav {
-    width: 70px;
-    height: 100vh;
-    background: #000;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding-top: 20px;
-    border-right: 1px solid #1a1a1a;
+    width: 70px; height: 100vh; background: #000;
+    display: flex; flex-direction: column; align-items: center;
+    padding-top: 20px; border-right: 1px solid var(--border);
 }
-.side-nav .logo { font-family: 'Orbitron'; color: var(--verde); font-weight: bold; margin-bottom: 40px; font-size: 1.5rem; }
+.side-nav .logo { font-family: 'Orbitron'; color: var(--verde); font-weight: bold; margin-bottom: 40px; font-size: 1.4rem; }
 .side-nav .logo span { color: var(--azul); }
 .side-nav button {
-    background: none; border: none; font-size: 1.5rem; margin-bottom: 30px;
-    cursor: pointer; transition: 0.3s; grayscale: 1; opacity: 0.5;
+    background: none; border: none; font-size: 1.4rem; margin-bottom: 35px;
+    cursor: pointer; transition: 0.3s; opacity: 0.4; color: white;
 }
-.side-nav button:hover { opacity: 1; transform: scale(1.2); }
+.side-nav button:hover { opacity: 1; transform: scale(1.15); color: var(--verde); }
 
-/* Áreas das Páginas */
-#main-content { flex: 1; padding: 60px 40px 40px 40px; height: 100vh; overflow-y: auto; }
-.page { display: none; animation: fadeIn 0.5s ease forwards; }
+/* Área Principal */
+#main-content { flex: 1; padding: 60px 30px 30px 30px; height: 100vh; overflow-y: auto; }
+.page { display: none; animation: fadeIn 0.4s ease forwards; }
 .page.active { display: block; }
 
-/* MAPA SATÉLITE */
+/* VISÃO DE SATÉLITE EM TEMPO REAL */
+.satellite-container { margin-top: 20px; }
 .satellite-view {
-    width: 100%;
-    height: 450px;
-    background: url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=1200&q=80');
-    background-size: cover;
-    border: 2px solid #1a1a1a;
-    border-radius: 10px;
-    position: relative;
-    filter: sepia(0.3) hue-rotate(80deg) brightness(0.7); /* Efeito Satélite Militar */
+    width: 100%; height: 400px;
+    background: radial-gradient(circle, rgba(0,30,10,0.6) 0%, rgba(0,5,0,0.9) 100%), 
+                url('https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1200&q=80');
+    background-size: cover; border: 2px solid var(--border); border-radius: 12px;
+    position: relative; overflow: hidden;
 }
-.map-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    height: 100%;
-}
+.map-grid { display: grid; grid-template-columns: repeat(3, 1fr); height: 100%; }
 .sector {
-    border: 1px solid rgba(46, 204, 113, 0.2);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    transition: 0.3s;
+    border: 1px dashed rgba(0, 255, 102, 0.15);
+    display: flex; align-items: flex-end; padding: 15px; transition: 0.3s;
 }
-.sector:hover { background: rgba(46, 204, 113, 0.1); border: 1px solid var(--verde); }
-.sector span { font-family: 'Orbitron'; font-size: 0.6rem; color: var(--verde); background: rgba(0,0,0,0.5); padding: 5px; }
+.sector:hover { background: rgba(0, 255, 102, 0.05); border: 1px solid var(--verde); }
+.sector span { font-family: 'Orbitron'; font-size: 0.65rem; color: var(--verde); text-shadow: 0 0 5px #000; }
 
-/* MISSION CARDS */
-.mission-card {
-    background: var(--card);
-    padding: 30px;
-    border-radius: 20px;
-    max-width: 700px;
-    margin: 0 auto;
+/* Efeito Scanner de Radar */
+.radar-scan { position: relative; }
+.radar-scan::before {
+    content: ''; position: absolute; top: -300px; left: 0; width: 100%; height: 5px;
+    background: rgba(0, 255, 102, 0.5); box-shadow: 0 0 20px var(--verde);
+    animation: scan 4s linear infinite;
 }
-.tag { font-family: 'Orbitron'; color: var(--azul); font-size: 0.8rem; }
-.img-placeholder {
-    width: 100%;
-    height: 200px;
-    background-size: cover;
-    border-radius: 10px;
-    margin: 20px 0;
-    border: 1px solid #333;
-}
-.drone-view { background-image: url('https://images.unsplash.com/photo-1508614589041-895b88991e3e?auto=format&fit=crop&w=800&q=80'); }
-.soil-view { background-image: url('https://images.unsplash.com/photo-1592982537447-7440770cbfc9?auto=format&fit=crop&w=800&q=80'); }
-.water-view { background-image: url('https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?auto=format&fit=crop&w=800&q=80'); }
 
-.options { display: flex; gap: 10px; margin-top: 20px; }
-button.opt-ok, button.opt-err {
-    flex: 1; padding: 15px; border: none; border-radius: 10px; cursor: pointer;
-    font-weight: bold; color: white; transition: 0.3s;
-}
-.opt-ok { background: var(--verde); }
-.opt-err { background: var(--terra); }
+.map-legend { margin-top: 15px; display: flex; justify-content: space-between; align-items: center; font-size: 0.85rem; color: #888; }
+.btn-main { background: var(--verde); color: #000; padding: 10px 20px; border: none; border-radius: 6px; font-weight: bold; cursor: pointer; font-family: 'Orbitron'; }
 
-.result { margin-top: 20px; padding: 15px; border-radius: 10px; background: rgba(255,255,255,0.05); border-left: 4px solid var(--azul); }
+/* BANCO DE QUESTÕES (SIMULADOR) */
+.mission-card { background: var(--card); padding: 35px; border-radius: 16px; max-width: 750px; margin: 0 auto; border: 1px solid var(--border); }
+.progress-bar { font-family: 'Orbitron'; color: var(--azul); font-size: 0.8rem; margin-bottom: 15px; }
+.img-placeholder { width: 100%; height: 220px; background-size: cover; background-position: center; border-radius: 8px; margin-bottom: 20px; border: 1px solid var(--border); }
+.question { font-size: 1.15rem; font-weight: 600; margin-bottom: 25px; line-height: 1.5; }
 
-/* IA ASSISTENTE */
-#ai-assistant { position: fixed; bottom: 20px; right: 20px; z-index: 1000; }
-.ai-toggle {
-    width: 60px; height: 60px; border-radius: 50%; background: var(--azul);
-    color: white; border: none; font-family: 'Orbitron'; cursor: pointer; box-shadow: 0 0 20px var(--azul);
+.options-vertical { display: flex; flex-direction: column; gap: 12px; }
+.options-vertical button {
+    padding: 16px; text-align: left; font-size: 0.95rem; background: rgba(255,255,255,0.02);
+    border: 1px solid var(--border); border-radius: 8px; color: var(--text); cursor: pointer; transition: 0.2s;
 }
-.ai-window {
-    width: 300px; height: 400px; background: #000; border: 1px solid var(--azul);
-    border-radius: 15px; margin-bottom: 10px; display: flex; flex-direction: column; overflow: hidden;
-}
-.ai-header { background: var(--azul); padding: 10px; font-size: 0.8rem; font-weight: bold; }
-.ai-messages { flex: 1; padding: 10px; overflow-y: auto; font-size: 0.8rem; display: flex; flex-direction: column; gap: 10px; }
-.bot-msg { background: #1a1a1a; padding: 8px; border-radius: 10px; align-self: flex-start; }
-.user-msg { background: var(--azul); padding: 8px; border-radius: 10px; align-self: flex-end; }
-.ai-input { display: flex; padding: 10px; border-top: 1px solid #333; }
-.ai-input input { flex: 1; background: none; border: none; color: white; outline: none; }
+.options-vertical button:hover { border-color: var(--azul); background: rgba(0, 217, 255, 0.05); }
 
-/* UTILS */
-.hidden { display: none !important; }
-@keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.3; } 100% { opacity: 1; } }
-@keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+.result { margin-top: 25px; padding: 20px; border-radius: 8px; background: #070f0b; border-left: 4px solid var(--verde); }
+.btn-next { background: var(--azul); color: #000; padding: 10px 20px; border: none; border-radius: 6px; font-weight: bold; cursor: pointer; margin-top: 15px; font-family: 'Orbitron'; }
+
+/* PÁGINA EXCLUSIVA DA IA */
+.ia-central-box { max-width: 850px; margin: 0 auto; }
+.ia-intro { margin-bottom: 25px; }
+.ia-intro h2 { font-family: 'Orbitron'; color: var(--azul); margin-bottom: 8px; }
+.chat-main-window { background: var(--card); border: 1px solid var(--border); border-radius: 16px; height: 450px; display: flex; flex-direction: column; overflow: hidden; }
+.chat-messages { flex: 1; padding: 25px; overflow-y: auto; display: flex; flex-direction: column; gap: 15px; font-size: 0.9rem; }
+.bot-msg { background: rgba(0, 217, 255, 0.08); border: 1px solid rgba(0, 217, 255, 0.2); padding: 12px 18px; border-radius: 12px; align-self: flex-start; max-width: 85%; color: #d0f4fc; }
+.user-msg { background: rgba(0, 255, 102, 0.08); border: 1px solid rgba(0, 255, 102, 0.2); padding: 12px 18px; border-radius: 12px; align-self: flex-end; max-width: 85%; color: #d0fcd8; }
+.chat-input-bar { display: flex; padding: 15px; background: #020503; border-top: 1px solid var(--border); gap: 10px; }
+.chat-input-bar input { flex: 1; background: rgba(255,255,255,0.02); border: 1px solid var(--border); border-radius: 8px; padding: 12px; color: white; outline: none; }
+.chat-input-bar button { background: var(--azul); color: #000; border: none; padding: 0 25px; border-radius: 8px; font-weight: bold; cursor: pointer; font-family: 'Orbitron'; }
+
+/* Textos Institucionais */
+.content-text h2 { font-family: 'Orbitron'; color: var(--verde); margin-bottom: 15px; }
+.agrinho-box { background: var(--card); padding: 20px; border-radius: 10px; border: 1px solid var(--border); margin-top: 30px; }
+
+/* Animações */
+@keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
+@keyframes scan { from { top: 0%; } to { top: 100%; } }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+
+/* Mobile */
+@media (max-width: 768px) {
+    body { flex-direction: column; }
+    .side-nav { width: 100%; height: 60px; flex-direction: row; justify-content: space-around; padding: 0; position: fixed; bottom: 0; left: 0; z-index: 1000; border-right: none; border-top: 1px solid var(--border); }
+    .side-nav .logo { display: none; }
+    .side-nav button { margin: 0; }
+    #telemetry-header { left: 0; font-size: 0.6rem; }
+    #main-content { padding: 50px 15px 80px 15px; }
+    .map-grid { grid-template-columns: 1fr; }
+    .map-legend { flex-direction: column; gap: 15px; text-align: center; }
+}
