@@ -3,99 +3,154 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ciclo Vivo | Painel Satelital</title>
+    <title>Ciclo Vivo | Agro Forte & Sustentável</title>
     <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
 </head>
 <body>
 
-    <div id="telemetry-header">
+    <div id="impact-bar">
         <div class="container">
-            <span class="live-indicator">● LIVE SAT-2026</span>
-            <span class="stat">H2O POUPADA: <strong id="h2o-val">0</strong>L</span>
-            <span class="stat">CO2 REMOVIDO: <strong id="co2-val">0</strong>kg</span>
+            <span>🌍 Monitoramento RT (1ha): </span>
+            <strong><span id="water-saved">0</span>L de água economizados</strong> | 
+            <strong><span id="co2-saved">0</span>kg de CO2 sequestrados</strong>
         </div>
     </div>
 
-    <nav class="side-nav">
-        <div class="logo">C<span>V</span></div>
-        <button onclick="nav('home')" title="Mapa Satélite">🛰️</button>
-        <button onclick="nav('simulador')" title="Simulador de Campo">🎮</button>
-        <button onclick="nav('ia-page')" title="AgroIA Central">🤖</button>
-        <button onclick="nav('sobre')" title="Sobre o Projeto">👨‍💻</button>
+    <nav>
+        <div class="container nav-content">
+            <div class="logo">Ciclo<span>Vivo</span></div>
+            <ul class="nav-menu">
+                <li><a href="#" onclick="navigateTo('home')">Central do Mapa</a></li>
+                <li><a href="#" onclick="navigateTo('agro-ia')">Fale com a AgroIA</a></li>
+                <li><a href="#" onclick="navigateTo('sobre-mim')">Sobre Mim / Agrinho</a></li>
+            </ul>
+        </div>
     </nav>
 
-    <main id="main-content">
-        
-        <section id="home" class="page active">
-            <div class="page-header">
-                <h1>Monitoramento de Satélite em Tempo Real</h1>
-                <p>Análise termográfica da propriedade. Acesse o painel de decisões para intervir nos talhões.</p>
-            </div>
-            <div class="satellite-container">
-                <div class="satellite-view">
-                    <div class="map-grid">
-                        <div class="sector s1"><span class="radar-scan">TALHÃO ALFA: LAVOURA (AFLITO POR PRAGAS)</span></div>
-                        <div class="sector s2"><span>TALHÃO BETA: SOLO (EXPOSTO PÓS-COLHEITA)</span></div>
-                        <div class="sector s3"><span>SETOR GAMA: APP (VÁZÃO EM QUEDA)</span></div>
-                    </div>
-                </div>
-                <div class="map-legend">
-                    <p>🟢 Áreas Verdes: Fotossíntese Estável | 🔴 Áreas Vermelhas: Estresse Hídrico/Biológico</p>
-                    <button class="btn-main" onclick="nav('simulador')">Iniciar Protocolo de Decisões →</button>
-                </div>
-            </div>
-        </section>
+    <section id="home" class="page active">
+        <header class="hero">
+            <h1>Cultivando hoje o mundo que queremos colher amanhã.</h1>
+            <p>Conecte-se aos talhões da nossa fazenda tecnológica e gerencie em tempo real.</p>
+        </header>
 
-        <section id="simulador" class="page">
-            <div class="mission-card">
-                <div class="progress-bar">Questão <span id="current-q">1</span> de 4</div>
-                <h2 id="question-title">Carregando dados do talhão...</h2>
-                <div id="question-img" class="img-placeholder"></div>
-                <p id="question-text" class="question"></p>
-                
-                <div class="options-vertical" id="options-container">
-                    </div>
-                
-                <div id="sim-result" class="result hidden">
-                    <p id="result-feedback"></p>
-                    <button id="next-btn" class="btn-next" onclick="nextQuestion()">Próxima Análise →</button>
-                </div>
-            </div>
-        </section>
-
-        <section id="ia-page" class="page">
-            <div class="ia-central-box">
-                <div class="ia-intro">
-                    <h2>🤖 AgroIA: Núcleo de Inteligência Analítica</h2>
-                    <p>Ficou com dúvidas sobre os termos do simulador ou quer entender os dados do satélite? Pergunte diretamente ao nosso modelo especializado em Agricultura 4.0.</p>
+        <div class="container">
+            <div class="map-section">
+                <div class="map-header">
+                    <h2>🛰️ Satélite RT-2026: Visão Geral da Propriedade</h2>
+                    <span class="pulse-badge">● TRANSMISSÃO AO VIVO</span>
                 </div>
                 
-                <div class="chat-main-window">
-                    <div class="chat-messages" id="chat-scroller">
-                        <div class="bot-msg">Sistemas online. Estou pronta para processar suas dúvidas sobre manejo sustentável, plantio direto, drones ou o Agrinho 2026. O que quer investigar?</div>
+                <div class="farm-map">
+                    <div class="map-zone zone-lavoura" onclick="goToQuestion(1)">
+                        <div class="zone-overlay">
+                            <span>Talhão 01: Lavoura</span>
+                            <small>⚠️ Alerta de Insetos</small>
+                        </div>
                     </div>
-                    <div class="chat-input-bar">
-                        <input type="text" id="user-query" placeholder="Ex: Como os drones ajudam a economizar defensivos?" onkeypress="if(event.key==='Enter') sendQuery()">
-                        <button onclick="sendQuery()">Enviar Dados</button>
+                    <div class="map-zone zone-solo" onclick="goToQuestion(2)">
+                        <div class="zone-overlay">
+                            <span>Talhão 02: Solo</span>
+                            <small>📊 Pronto para Plantio</small>
+                        </div>
+                    </div>
+                    <div class="map-zone zone-nascente" onclick="goToQuestion(3)">
+                        <div class="zone-overlay">
+                            <span>APP: Nascente</span>
+                            <small>💧 Monitorando Vazão</small>
+                        </div>
                     </div>
                 </div>
             </div>
-        </section>
 
-        <section id="sobre" class="page">
-            <div class="content-text">
-                <h2>Ciclo Vivo: Onde a Tecnologia encontra a Raiz</h2>
-                <p>Este ecossistema digital foi planejado para o **Concurso Agrinho 2026** por um aluno focado no 1º ano do Ensino Médio.</p>
-                <p>A ideia não é retroceder nas técnicas do campo, mas usar programação, satélites e biologia molecular para otimizar os recursos do planeta.</p>
-                <div class="agrinho-box">
-                    <h3>Tema: Agro Forte, Futuro Sustentável</h3>
-                    <p>Construindo o equilíbrio exato entre a alta performance de produção e a preservação rigorosa do meio ambiente.</p>
+            <div class="info-grid">
+                <div class="info-item">
+                    <h3>🛰️ Agricultura de Precisão</h3>
+                    <p>Sensores IoT mapeiam o campo centímetro por centímetro, aplicando recursos apenas onde é necessário.</p>
+                </div>
+                <div class="info-item">
+                    <h3>🌱 Herança Viva</h3>
+                    <p>O equilíbrio perfeito usa a automação digital para proteger a microbiota da terra e as águas.</p>
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
 
-    </main>
+    <section id="question-page" class="page">
+        <div class="container">
+            <button class="btn-back" onclick="navigateTo('home')">← Voltar ao Mapa Geral</button>
+            
+            <div class="game-card">
+                <div class="telemetry-bar">📡 Telemetria do Talhão Ativa</div>
+                
+                <div class="satellite-img-container">
+                    <img id="q-image" src="" alt="Visão do Satélite">
+                </div>
+
+                <h2 id="q-title">Carregando Missão...</h2>
+                <p id="q-desc" class="question-text"></p>
+                
+                <div class="game-choices" id="q-choices"></div>
+
+                <div id="q-result" class="result-box hidden">
+                    <h3>📋 Relatório de Impacto Ambiental e Econômico</h3>
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <span class="stat-title">Solo</span>
+                            <span id="stat-soil" class="stat-value">--</span>
+                        </div>
+                        <div class="stat-card">
+                            <span class="stat-title">Lucratividade</span>
+                            <span id="stat-profit" class="stat-value">--</span>
+                        </div>
+                        <div class="stat-card">
+                            <span class="stat-title">Biodiversidade</span>
+                            <span id="stat-bio" class="stat-value">--</span>
+                        </div>
+                    </div>
+                    <p id="q-feedback" class="feedback-text"></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="agro-ia" class="page">
+        <div class="container chat-container">
+            <div class="chat-header">
+                <h2>🤖 AgroIA: Assistente de Sustentabilidade</h2>
+                <p>Pergunte-me sobre Drones, Plantio Direto, Crédito de Carbono ou o Agrinho!</p>
+            </div>
+            <div class="chat-box" id="chat-box">
+                <div class="message ia-message">Olá! Sou a AgroIA. Digite sua dúvida ou selecione uma das perguntas frequentes abaixo!</div>
+            </div>
+            
+            <div class="chat-suggestions">
+                <button onclick="askIA('O que é Agricultura de Precisão?')">O que é Agricultura de Precisão?</button>
+                <button onclick="askIA('Como o Plantio Direto ajuda o planeta?')">Como o Plantio Direto ajuda o planeta?</button>
+                <button onclick="askIA('Qual o tema do Agrinho 2026?')">Qual o tema do Agrinho 2026?</button>
+            </div>
+
+            <div class="chat-input-area">
+                <input type="text" id="user-input" placeholder="Digite sua pergunta sobre o agro sustentável..." onkeypress="if(event.key === 'Enter') sendUserMessage()">
+                <button class="btn-tech" onclick="sendUserMessage()">Enviar</button>
+            </div>
+        </div>
+    </section>
+
+    <section id="sobre-mim" class="page">
+        <div class="container content-text">
+            <h2>👨‍💻 O Autor</h2>
+            <p>Olá! Sou aluno do 1º ano do Ensino Médio e entusiasta da tecnologia aplicada ao campo.</p>
+            <p>O <strong>Ciclo Vivo</strong> nasceu da vontade de mostrar que o jovem do campo é um cientista de dados, um piloto de drone e, acima de tudo, o guardião da nossa terra.</p>
+            
+            <hr style="margin: 40px 0; border: 0; border-top: 1px solid #ccc;">
+
+            <h2>🌾 Concurso Agrinho 2026</h2>
+            <p>O maior programa de responsabilidade social do sistema FAEP/SENAR-PR.</p>
+            <p>O tema <strong>Agro Forte, Futuro Sustentável</strong> nos desafia a equilibrar a balança: produzir alimento para o mundo enquanto regeneramos nossos biomas.</p>
+            <blockquote>"O equilíbrio entre produção e meio ambiente é a única colheita possível para o futuro."</blockquote>
+        </div>
+    </section>
 
     <script src="script.js"></script>
 </body>
