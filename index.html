@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ciclo Vivo | Dashboard Satelital</title>
+    <title>Ciclo Vivo | Painel Satelital</title>
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
 </head>
@@ -20,9 +20,8 @@
     <nav class="side-nav">
         <div class="logo">C<span>V</span></div>
         <button onclick="nav('home')" title="Mapa Satélite">🛰️</button>
-        <button onclick="nav('missao1')" title="Controle de Pragas">🪲</button>
-        <button onclick="nav('missao2')" title="Saúde do Solo">🌱</button>
-        <button onclick="nav('missao3')" title="Recursos Hídricos">💧</button>
+        <button onclick="nav('simulador')" title="Simulador de Campo">🎮</button>
+        <button onclick="nav('ia-page')" title="AgroIA Central">🤖</button>
         <button onclick="nav('sobre')" title="Sobre o Projeto">👨‍💻</button>
     </nav>
 
@@ -30,4 +29,74 @@
         
         <section id="home" class="page active">
             <div class="page-header">
-                <h1>
+                <h1>Monitoramento de Satélite em Tempo Real</h1>
+                <p>Análise termográfica da propriedade. Acesse o painel de decisões para intervir nos talhões.</p>
+            </div>
+            <div class="satellite-container">
+                <div class="satellite-view">
+                    <div class="map-grid">
+                        <div class="sector s1"><span class="radar-scan">TALHÃO ALFA: LAVOURA (AFLITO POR PRAGAS)</span></div>
+                        <div class="sector s2"><span>TALHÃO BETA: SOLO (EXPOSTO PÓS-COLHEITA)</span></div>
+                        <div class="sector s3"><span>SETOR GAMA: APP (VÁZÃO EM QUEDA)</span></div>
+                    </div>
+                </div>
+                <div class="map-legend">
+                    <p>🟢 Áreas Verdes: Fotossíntese Estável | 🔴 Áreas Vermelhas: Estresse Hídrico/Biológico</p>
+                    <button class="btn-main" onclick="nav('simulador')">Iniciar Protocolo de Decisões →</button>
+                </div>
+            </div>
+        </section>
+
+        <section id="simulador" class="page">
+            <div class="mission-card">
+                <div class="progress-bar">Questão <span id="current-q">1</span> de 4</div>
+                <h2 id="question-title">Carregando dados do talhão...</h2>
+                <div id="question-img" class="img-placeholder"></div>
+                <p id="question-text" class="question"></p>
+                
+                <div class="options-vertical" id="options-container">
+                    </div>
+                
+                <div id="sim-result" class="result hidden">
+                    <p id="result-feedback"></p>
+                    <button id="next-btn" class="btn-next" onclick="nextQuestion()">Próxima Análise →</button>
+                </div>
+            </div>
+        </section>
+
+        <section id="ia-page" class="page">
+            <div class="ia-central-box">
+                <div class="ia-intro">
+                    <h2>🤖 AgroIA: Núcleo de Inteligência Analítica</h2>
+                    <p>Ficou com dúvidas sobre os termos do simulador ou quer entender os dados do satélite? Pergunte diretamente ao nosso modelo especializado em Agricultura 4.0.</p>
+                </div>
+                
+                <div class="chat-main-window">
+                    <div class="chat-messages" id="chat-scroller">
+                        <div class="bot-msg">Sistemas online. Estou pronta para processar suas dúvidas sobre manejo sustentável, plantio direto, drones ou o Agrinho 2026. O que quer investigar?</div>
+                    </div>
+                    <div class="chat-input-bar">
+                        <input type="text" id="user-query" placeholder="Ex: Como os drones ajudam a economizar defensivos?" onkeypress="if(event.key==='Enter') sendQuery()">
+                        <button onclick="sendQuery()">Enviar Dados</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="sobre" class="page">
+            <div class="content-text">
+                <h2>Ciclo Vivo: Onde a Tecnologia encontra a Raiz</h2>
+                <p>Este ecossistema digital foi planejado para o **Concurso Agrinho 2026** por um aluno focado no 1º ano do Ensino Médio.</p>
+                <p>A ideia não é retroceder nas técnicas do campo, mas usar programação, satélites e biologia molecular para otimizar os recursos do planeta.</p>
+                <div class="agrinho-box">
+                    <h3>Tema: Agro Forte, Futuro Sustentável</h3>
+                    <p>Construindo o equilíbrio exato entre a alta performance de produção e a preservação rigorosa do meio ambiente.</p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
