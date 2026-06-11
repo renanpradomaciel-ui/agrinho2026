@@ -1,32 +1,52 @@
-// Contador em Tempo Real do Topo
-let litrosAgua = 0;
-let kgCO2 = 0;
+// CONTADOR DINÂMICO DE IMPACTO
+let agua = 0;
+let co2 = 0;
+setInterval(() => {
+    agua += 15;
+    co2 += 0.2;
+    document.getElementById('h2o-val').innerText = Math.floor(agua).toLocaleString();
+    document.getElementById('co2-val').innerText = co2.toFixed(1);
+}, 2000);
 
-function rodaTelemetriaEstatistica() {
-    litrosAgua += 85; 
-    kgCO2 += 0.3;
+// NAVEGAÇÃO ENTRE PÁGINAS
+function nav(id) {
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+}
+
+// SISTEMA DE MISSÕES (RESPOSTAS)
+function answer(type, missionId) {
+    const res = document.getElementById(`res-${missionId}`);
+    res.classList.remove('hidden');
     
-    const elAgua = document.getElementById('water-saved');
-    const elCO2 = document.getElementById('co2-saved');
-    
-    if(elAgua && elCO2) {
-        elAgua.innerText = Math.floor(litrosAgua).toLocaleString('pt-BR');
-        elCO2.innerText = kgCO2.toFixed(1).replace('.', ',');
+    if(type === 'ok') {
+        res.style.borderColor = "#2ecc71";
+        res.innerHTML = "<strong>✅ SUCESSO:</strong> Tecnologia aplicada com precisão. O ecossistema está equilibrado e a produção cresceu 15%.";
+    } else {
+        res.style.borderColor = "#e67e22";
+        res.innerHTML = "<strong>⚠️ ALERTA:</strong> Decisão de alto impacto ambiental. O lucro imediato mascarou a degradação do solo a longo prazo.";
     }
 }
-setInterval(rodaTelemetriaEstatistica, 1500);
 
-// Navegação entre as telas (SPA)
-function navigateTo(pageId) {
-    document.querySelectorAll('.page').forEach(pag => pag.classList.remove('active'));
-    document.getElementById(pageId).classList.add('active');
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+// INTELIGÊNCIA ARTIFICIAL SIMULADA (BRAIN)
+function toggleAI() {
+    document.getElementById('ai-window').classList.toggle('hidden');
 }
 
-// BANCO DE DADOS: Perguntas e Imagens específicas por Talhão
-const bancoQuestoes = {
-    1: {
-        titulo: "🛰️ Página do Talhão 01: Monitoramento de Pragas",
-        imagem: "https://images.unsplash.com/photo-1563514227147-6d2ff66526a0?auto=format&fit=crop&w=800&q=80", // Foto de drone analisando plantação
-        descricao: "Nossos sensores térmicos captaram focos iniciais de Lagarta-do-Cartucho no meio da lavoura de milho. Qual comando você envia?",
-        alternativas:
+function askAI() {
+    const input = document.getElementById('ai-input');
+    const msgArea = document.getElementById('ai-msg');
+    const question = input.value.toLowerCase();
+    
+    if(!question) return;
+
+    // Adiciona msg do usuário
+    msgArea.innerHTML += `<div class="user-msg">${input.value}</div>`;
+    input.value = "";
+
+    // Lógica de resposta
+    let response = "Interessante... Como uma IA, analisei que essa técnica impacta diretamente o ODS 12 e 13. O futuro sustentável depende de dados assim!";
+    
+    if(question.includes("drone")) response = "Drones de precisão economizam até 80% de defensivos químicos ao aplicar apenas onde a praga está.";
+    if(question.includes("carbono")) response = "O plantio direto sequestra carbono no solo, impedindo que ele vá para a atmosfera aquecer o planeta.";
+    if(question.includes("agrinho")) response = "O Concurso Agrinho 2026 é a
